@@ -14,17 +14,19 @@ def index1(path):
 @app.route("/request-fetch", methods=["POST"])
 def fetch_and_response():
     from requests.exceptions import RequestException, HTTPError, ConnectionError, Timeout
-    # DEBUG:
-    logging.info(request.headers.get("Origin"))
-    logging.info(request.body)
+
+    url_to_fetch = request.get_json(silent=True)
+    logging.info(url_to_fetch)
+    if url_to_fetch is None:
+        return (jsonify("Bad JSON"), 400)
     try:
-        response = requests.get(request.body)
+        response = requests.get(url_to_fetch)
         response.raise_for_status()
     except (HTTPError, ConnectionError, Timeout, RequestException) as err:
         # DEBUG:
         logging.info(err)
-        return (err.__str__(), 500, {"Content-Type": "text/plain"})
-    return ("Hello, Iscra-chan", {"Content-Type": "text/plain"})
+        return (jsonify(err.__str__()), 500)
+    return jsonify("Hello, Iscra-chan")
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8000)))
