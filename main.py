@@ -12,7 +12,7 @@ def fetch_and_response():
     except (HTTPError, ConnectionError, Timeout, RequestException) as err:
         return (err.__str__(), 500, {"Content-Type": "text/plain"})
     return ("Hello, Iscra-chan", {"Content-Type": "text/plain"})
-@app.route("/<_>", methods=["GET"])
+@app.route("/<path:_>", methods=["GET"])
 def index(_):
     return "Hello, Iscra-chan!"
 
