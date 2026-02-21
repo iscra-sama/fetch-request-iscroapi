@@ -17,6 +17,8 @@ def fetch_and_response():
         response = requests.get(request.headers.get("Origin"))
         response.raise_for_status()
     except (HTTPError, ConnectionError, Timeout, RequestException) as err:
+        # DEBUG:
+        print(err)
         return (err.__str__(), 500, {"Content-Type": "text/plain"})
     return ("Hello, Iscra-chan", {"Content-Type": "text/plain"})
 
