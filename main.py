@@ -16,8 +16,9 @@ def fetch_and_response():
     from requests.exceptions import RequestException, HTTPError, ConnectionError, Timeout
     # DEBUG:
     logging.info(request.headers.get("Origin"))
+    logging.info(request.body)
     try:
-        response = requests.get(request.headers.get("Origin"))
+        response = requests.get(request.body)
         response.raise_for_status()
     except (HTTPError, ConnectionError, Timeout, RequestException) as err:
         # DEBUG:
