@@ -15,6 +15,7 @@ def index1(path):
 def fetch_and_response():
     from requests.exceptions import RequestException, HTTPError, ConnectionError, Timeout
 
+    print(request.data)
     url_to_fetch = request.get_json(silent=True)
     logging.info(url_to_fetch)
     if url_to_fetch is None:
