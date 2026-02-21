@@ -2,7 +2,7 @@ import requests
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
-@app.route("/request-fetch", methods=["GET"])
+@app.route("/request-fetch", methods=["POST"])
 def fetch_and_response():
     from requests.exceptions import RequestException, HTTPError, ConnectionError, Timeout
     try:
