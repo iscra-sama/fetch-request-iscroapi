@@ -2,14 +2,14 @@ import os
 import sys
 import logging
 import requests
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)])
 app = Flask(__name__)
 
 @app.route("/<path:path>")
 def index1(path):
-    return "Hello, Iscra-chan!"
+    return render_template("index.html")
 
 @app.route("/request-fetch", methods=["POST"])
 def fetch_and_response():
